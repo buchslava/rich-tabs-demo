@@ -20,13 +20,14 @@ import { DynamicTabsDirective } from './dynamic-tabs.directive';
   selector: 'my-tabs',
   template: `
     <ul class="nav nav-tabs">
+      <li class="special"><ng-content select=".logo"></ng-content></li>
       <li *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
         <a href="#">{{tab.title}}</a>
       </li>
-      <!-- dynamic tabs -->
       <li *ngFor="let tab of dynamicTabs" (click)="selectTab(tab)" [class.active]="tab.active">
         <a href="#">{{tab.title}} <span class="tab-close" *ngIf="tab.isCloseable" (click)="closeTab(tab)">x</span></a>
       </li>
+      <li class="special"><ng-content select=".addNew"></ng-content></li>
     </ul>
     <ng-content></ng-content>
     <ng-template dynamic-tabs #container></ng-template>
@@ -37,6 +38,11 @@ import { DynamicTabsDirective } from './dynamic-tabs.directive';
       color: gray;
       text-align: right;
       cursor: pointer;
+    }
+    .special{
+      max-width:100px;
+      padding-left:4px;
+      padding-right:4px;
     }
     `
   ]
